@@ -77,3 +77,12 @@ def mostrar_mapa(mapa, mapa_inimigo):
             else:
                 print('□', end=" ")
         print()
+def listar_posicoes_disponiveis(mapa, tamanho_barco):
+    posicoes = []
+    for i in range(10):
+        for j in range(10):
+            if j + tamanho_barco <= 10 and np.all(mapa[i, j:j+tamanho_barco] == ' '):
+                posicoes.append((i, j, 'horizontal'))
+            if i + tamanho_barco <= 10 and np.all(mapa[i:i+tamanho_barco, j] == ' '):
+                posicoes.append((i, j, 'vertical'))
+    return posicoes
