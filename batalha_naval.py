@@ -75,6 +75,7 @@ def escolha_pais(pais):
     pais=input('Escolha seu país: ')
     for pais in PAISES:
         jogador1[pais]=PAISES[pais]
+        print(escolha_pais('Você escolheu {pais} para jogar, prepare-se!'))
 
     
 def imprime_mapa(mapa):
