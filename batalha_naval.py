@@ -58,8 +58,30 @@ CORES = {
     'cyan': '\u001b[36m',
     'white': '\u001b[37m'
 }
-pais=input('Qual país deseja jogar?: ')
-linha=[1,2,3,4,5,6,7,8,9,10]
-coluna=[A,B,C,D,E,F,G,H,I,J]
-for i in range(len(linha)):
-    for j in range(len(coluna)):
+mapa = [
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+]
+jogador1={}
+def escolha_pais(pais):
+    pais=input('Escolha seu país: ')
+    for pais in PAISES:
+        jogador1[pais]=PAISES[pais]
+
+    
+def imprime_mapa(mapa):
+    lista_ataques=[]
+    print(ALFABETO[:10])
+    for linha in range(len(mapa)):
+        for coluna in range(len(mapa)):
+            ataque=mapa[linha][coluna]
+            if ataque not in lista_ataques:
+                lista_ataques.append(ataque)
