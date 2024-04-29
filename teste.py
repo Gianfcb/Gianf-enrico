@@ -60,3 +60,8 @@ def escolher_pais():
 def criar_estoque_pais(pais):
     estoque = PAISES[pais]
     return estoque
+def criar_estoque_computador():
+    paises_list = list(PAISES.keys())
+    pais_computador = random.choice(paises_list)
+    estoque_computador = PAISES[pais_computador]
+    return estoque_computador, pais_computador
