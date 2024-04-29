@@ -86,3 +86,7 @@ def listar_posicoes_disponiveis(mapa, tamanho_barco):
             if i + tamanho_barco <= 10 and np.all(mapa[i:i+tamanho_barco, j] == ' '):
                 posicoes.append((i, j, 'vertical'))
     return posicoes
+def alocar_barcos_jogador(mapa, estoque_jogador):
+    barcos_alocados = {}
+    for tipo_barco, quantidade in estoque_jogador.items():
+        for _ in range(quantidade):
