@@ -48,13 +48,13 @@ def escolher_pais():
     print("Escolha um país para jogar:")
     for idx, pais in enumerate(PAISES.keys()):
         print(f"{idx + 1}: {pais}")
-    opcao = input("Digite o número correspondente ao país: ")
+    opcao = input("Digite o número correspondente ao país que você deseja: ")
     opcao = int(opcao)
     paises_list = list(PAISES.keys())
     if 1 <= opcao <= len(paises_list):
         return paises_list[opcao - 1]
     else:
-        print("Opção inválida. Por favor, escolha um número válido.")
+        print("Opção inválida. Por favor, escolha um número válido da próxima vez.")
         return escolher_pais()
 
 def criar_estoque_pais(pais):
@@ -82,11 +82,16 @@ def listar_posicoes_disponiveis(mapa, tamanho_barco):
     for i in range(10):
         for j in range(10):
             if j + tamanho_barco <= 10 and np.all(mapa[i, j:j+tamanho_barco] == ' '):
-                posicoes.append((i, j, 'horizontal'))
+                posicoes.append((i, j, 'Horizontal'))
             if i + tamanho_barco <= 10 and np.all(mapa[i:i+tamanho_barco, j] == ' '):
-                posicoes.append((i, j, 'vertical'))
+                posicoes.append((i, j, 'Vertical'))
     return posicoes
 def alocar_barcos_jogador(mapa, estoque_jogador):
     barcos_alocados = {}
     for tipo_barco, quantidade in estoque_jogador.items():
         for _ in range(quantidade):
+            posicoes_disponiveis = listar_posicoes_disponiveis(mapa, CONFIGURACAO[tipo_barco])
+            print(f"Você pode alocar o {tipo_barco} nas seguintes posições listadas:")
+            for idx, posicao in enumerate(posicoes_disponiveis):
+                print(f"{idx + 1}: Linha {ALFABETO[posicao[0]]}, Coluna {posicao[1]} ({posicao[2]})")
+            opcao = int(input("Digite o número correspondente à posição desejada: "))
