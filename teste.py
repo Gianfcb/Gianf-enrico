@@ -95,7 +95,7 @@ def alocar_barcos_jogador(mapa, estoque_jogador):
             for idx, posicao in enumerate(posicoes_disponiveis):
                 print(f"{idx + 1}: Linha {ALFABETO[posicao[0]]}, Coluna {posicao[1]} ({posicao[2]})")
             opcao = int(input("Digite o número correspondente à posição desejada: "))
-             if 1 <= opcao <= len(posicoes_disponiveis):
+            if 1 <= opcao <= len(posicoes_disponiveis):
                 linha, coluna, orientacao = posicoes_disponiveis[opcao - 1]
                 if orientacao == 'horizontal':
                     mapa[linha, coluna:coluna+CONFIGURACAO[tipo_barco]] = tipo_barco[0].upper()
