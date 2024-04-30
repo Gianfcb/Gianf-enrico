@@ -109,3 +109,8 @@ def alocar_barcos_jogador(mapa, estoque_jogador):
             else:
                 print("Opção inválida. Por favor, escolha um número válido na próxima vez.")
     return mapa, barcos_alocados
+def barcos_jogador():
+    barcos_jogador = {}
+    for tipo_barco, qntd in CONFIGURACAO.items():
+        barcos_jogador[tipo_barco] = qntd
+    return barcos_jogador
