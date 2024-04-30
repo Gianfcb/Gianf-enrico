@@ -32,6 +32,15 @@ CORES = {
     'cyan': '\u001b[36m',
     'white': '\u001b[37m'
 }
+def cria_mapa(N):
+    N=10
+    mapa = []
+    for _ in range(N):
+        linha = []
+        for _ in range(N):
+            linha.append(' ')
+        mapa.append(linha)
+    return mapa
 def mostrar_mapa(mapa, mapa_inimigo):
     print("  A B C D E F G H I J")
     for i, linha in enumerate(mapa, start=1):
@@ -73,7 +82,7 @@ def mostrar_mapa(mapa, mapa_inimigo):
             if mapa_inimigo[i-1][j] == ' ':
                 print(mapa_inimigo[i-1][j], end=" ")
             elif mapa_inimigo[i-1][j] == 'X':
-                print('X', end=" ")
+                print('\u001b[31m', end=" ")
             else:
                 print('□', end=" ")
         print()
@@ -119,3 +128,6 @@ def sorteio_de_ataque():
 def mapa_bot():
     mapa_bot = np.full((10, 10), ' ')
     return mapa_bot
+
+
+
