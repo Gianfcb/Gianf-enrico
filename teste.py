@@ -114,3 +114,8 @@ def barcos_jogador():
     for tipo_barco, qntd in CONFIGURACAO.items():
         barcos_jogador[tipo_barco] = qntd
     return barcos_jogador
+def sorteio_de_ataque():
+    return random.choice(["Jogador", "Computador"])
+def mapa_bot():
+    mapa_bot = np.full((10, 10), ' ')
+    return mapa_bot
