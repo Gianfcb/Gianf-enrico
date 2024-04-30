@@ -95,3 +95,17 @@ def alocar_barcos_jogador(mapa, estoque_jogador):
             for idx, posicao in enumerate(posicoes_disponiveis):
                 print(f"{idx + 1}: Linha {ALFABETO[posicao[0]]}, Coluna {posicao[1]} ({posicao[2]})")
             opcao = int(input("Digite o número correspondente à posição desejada: "))
+             if 1 <= opcao <= len(posicoes_disponiveis):
+                linha, coluna, orientacao = posicoes_disponiveis[opcao - 1]
+                if orientacao == 'horizontal':
+                    mapa[linha, coluna:coluna+CONFIGURACAO[tipo_barco]] = tipo_barco[0].upper()
+                    for j in range(coluna, coluna+CONFIGURACAO[tipo_barco]):
+                        mapa[linha][j] = '■'
+                else:
+                    mapa[linha:linha+CONFIGURACAO[tipo_barco], coluna] = tipo_barco[0].upper()
+                    for i in range(linha, linha+CONFIGURACAO[tipo_barco]):
+                        mapa[i][coluna] = '■'
+                barcos_alocados[tipo_barco] = barcos_alocados.get(tipo_barco, 0) + 1
+            else:
+                print("Opção inválida. Por favor, escolha um número válido na próxima vez.")
+    return mapa, barcos_alocados
