@@ -41,18 +41,7 @@ def cria_mapa(N):
             linha.append(' ')
         mapa.append(linha)
     return mapa
-def mostrar_mapa(mapa, mapa_inimigo):
-    print("  A B C D E F G H I J")
-    for i, linha in enumerate(mapa, start=1):
-        print(f"{i:2}", end=" ")
-        for j, elemento in enumerate(linha):
-            if mapa_inimigo[i-1][j] == ' ':
-                print(mapa_inimigo[i-1][j], end=" ")
-            elif mapa_inimigo[i-1][j] == 'X':
-                print('X', end=" ")
-            else:
-                print('□', end=" ")
-        print()
+
 def escolher_pais():
     print("Escolha um país para jogar:")
     for idx, pais in enumerate(PAISES.keys()):
@@ -63,29 +52,39 @@ def escolher_pais():
     if 1 <= opcao <= len(paises_list):
         return paises_list[opcao - 1]
     else:
-        print("Opção inválida. Por favor, escolha um número válido da próxima vez.")
+        print("Opção inválida. Por favor, escolha um país válido da próxima vez.")
         return escolher_pais()
-
+    
 def criar_estoque_pais(pais):
     estoque = PAISES[pais]
     return estoque
-def criar_estoque_computador():
+    
+print("Bem-vindo à Batalha Naval!")
+
+pais_jogador = escolher_pais()
+estoque_jogador = criar_estoque_pais(pais_jogador)
+
+print(f"Você escolheu jogar pelo {pais_jogador}. Seu estoque de barcos:")
+print(estoque_jogador)
+
+def criar_estoque_bot():
     paises_list = list(PAISES.keys())
-    pais_computador = random.choice(paises_list)
-    estoque_computador = PAISES[pais_computador]
-    return estoque_computador, pais_computador
-def mostrar_mapa(mapa, mapa_inimigo):
+    pais_bot = random.choice(paises_list)
+    estoque_bot = PAISES[pais_bot]
+    print(f"Você está jogando contra {pais_bot}. Prepare-se para a batalha!")
+    print(f"O mapa do seu adversário ({pais_bot}):")
+    return estoque_bot, pais_bot 
+def mostrar_mapa(mapa, mapa_bot):
     print("  A B C D E F G H I J")
     for i, linha in enumerate(mapa, start=1):
         print(f"{i:2}", end=" ")
         for j, elemento in enumerate(linha):
-            if mapa_inimigo[i-1][j] == ' ':
-                print(mapa_inimigo[i-1][j], end=" ")
-            elif mapa_inimigo[i-1][j] == 'X':
+            if mapa_bot[i-1][j] == ' ':
+                print(mapa_bot[i-1][j], end=" ")
+            elif mapa_bot[i-1][j] == 'X':
                 print('\u001b[31m', end=" ")
             else:
                 print('□', end=" ")
-        print()
 def listar_posicoes_disponiveis(mapa, tamanho_barco):
     posicoes = []
     for i in range(10):
@@ -95,29 +94,6 @@ def listar_posicoes_disponiveis(mapa, tamanho_barco):
             if i + tamanho_barco <= 10 and np.all(mapa[i:i+tamanho_barco, j] == ' '):
                 posicoes.append((i, j, 'Vertical'))
     return posicoes
-def alocar_barcos_jogador(mapa, estoque_jogador):
-    barcos_alocados = {}
-    for tipo_barco, quantidade in estoque_jogador.items():
-        for _ in range(quantidade):
-            posicoes_disponiveis = listar_posicoes_disponiveis(mapa, CONFIGURACAO[tipo_barco])
-            print(f"Você pode alocar o {tipo_barco} nas seguintes posições listadas:")
-            for idx, posicao in enumerate(posicoes_disponiveis):
-                print(f"{idx + 1}: Linha {ALFABETO[posicao[0]]}, Coluna {posicao[1]} ({posicao[2]})")
-            opcao = int(input("Digite o número correspondente à posição desejada: "))
-            if 1 <= opcao <= len(posicoes_disponiveis):
-                linha, coluna, orientacao = posicoes_disponiveis[opcao - 1]
-                if orientacao == 'horizontal':
-                    mapa[linha, coluna:coluna+CONFIGURACAO[tipo_barco]] = tipo_barco[0].upper()
-                    for j in range(coluna, coluna+CONFIGURACAO[tipo_barco]):
-                        mapa[linha][j] = '■'
-                else:
-                    mapa[linha:linha+CONFIGURACAO[tipo_barco], coluna] = tipo_barco[0].upper()
-                    for i in range(linha, linha+CONFIGURACAO[tipo_barco]):
-                        mapa[i][coluna] = '■'
-                barcos_alocados[tipo_barco] = barcos_alocados.get(tipo_barco, 0) + 1
-            else:
-                print("Opção inválida. Por favor, escolha um número válido na próxima vez.")
-    return mapa, barcos_alocados
 def barcos_jogador():
     barcos_jogador = {}
     for tipo_barco, qntd in CONFIGURACAO.items():
@@ -153,8 +129,7 @@ def foi_derrotado(linha,coluna):
         if True:
             print('Você venceu, humberto estará orgulhoso!')
         print('Você perdeu, Humberto ficará triste :( , na próxima você consegue!')
-def marcar_acerto_mapa_inimigo(mapa, linha, coluna):
+def marcar_acerto_mapa_bot(mapa, linha, coluna):
     mapa[linha][coluna] = CORES['red'] + '■' + CORES['reset']
     return mapa
-
 
