@@ -128,6 +128,32 @@ def sorteio_de_ataque():
 def mapa_bot():
     mapa_bot = np.full((10, 10), ' ')
     return mapa_bot
+def ataque_jogador(mapa_bot):
+    while True:
+        try:
+            linha = int(input("Escolha a linha para atacar de 1 a 10: ")) - 1
+            coluna = int(input("Escolha a coluna para atacar de 1 a 10: ")) - 1
 
+            if linha < 0 or linha > 9 or coluna < 0 or coluna > 9:
+                print("Posição inválida. Escolha uma linha e coluna dentro do intervalo de 1 a 10.")
+                continue
+
+            if mapa_bot[linha][coluna] != ' ':
+                print("Você já atacou essa posição. Escolha outra.")
+                continue
+
+            return linha, coluna
+        except ValueError:
+            print("Entrada inválida. Por favor, insira um número.")
+
+
+def foi_derrotado(linha,coluna):
+        for i in linha:
+            for coluna in i:
+                if coluna=='N':
+                    return False
+        if True:
+            print('Você venceu, humberto estará orgulhoso!')
+        print('Você perdeu, Humberto ficará triste :( , na próxima você consegue!')
 
 
