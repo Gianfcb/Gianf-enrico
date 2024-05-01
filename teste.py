@@ -145,8 +145,6 @@ def ataque_jogador(mapa_bot):
             return linha, coluna
         except ValueError:
             print("Entrada inválida. Por favor, insira um número.")
-
-
 def foi_derrotado(linha,coluna):
         for i in linha:
             for coluna in i:
@@ -155,5 +153,8 @@ def foi_derrotado(linha,coluna):
         if True:
             print('Você venceu, humberto estará orgulhoso!')
         print('Você perdeu, Humberto ficará triste :( , na próxima você consegue!')
+def marcar_acerto_mapa_inimigo(mapa, linha, coluna):
+    mapa[linha][coluna] = CORES['red'] + '■' + CORES['reset']
+    return mapa
 
 
